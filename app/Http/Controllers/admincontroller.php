@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use PDF;
+
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\caissecontroller;
 use App\Journal;
 use App\Mennue;
 use App\Categorie;
 use App\Article;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 use Illuminate\Http\Request;
 
@@ -168,5 +171,15 @@ class admincontroller extends Controller
             'success',
             'vous avez fermer la caisse'
         );
+    }
+    public function seeqrcode($id)
+    {
+        $qrcode = base64_encode(QrCode::format('svg')->size(300)
+            ->generate("$id"));
+        $article = DB::select("select * from articles where id = $id ");
+
+        $pdf = PDF::loadView('pdf', compact('qrcode', 'article'));
+        $pathToFile =  $pdf->stream("$id arriveDJIB" . '.pdf');
+        return  $pathToFile;
     }
 }

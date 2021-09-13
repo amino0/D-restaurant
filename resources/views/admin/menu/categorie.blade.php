@@ -316,9 +316,7 @@
                                       @foreach ($articles as $row )
                                         <tr>
                                             <td>{{$row->nom}}</td>
-                                            <td>@php
-                                                echo "<span class='shadow-none badge badge-danger'>Active</span>";
-                                            @endphp                                         
+                                            <td><a href="{{url("seeqrcode/$row->id")}}"> <span class='shadow-none badge badge-warning'>Qr Code</span></a>                                         
                                                  </td>
 
                                             <td>{{$row->quantite}} <b>Nb</b></td>

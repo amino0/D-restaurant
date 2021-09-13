@@ -60,3 +60,4 @@ Route::group(['prefix' => 'caisse'], function () {
     Route::get('/voir/{id}', 'caissecontroller@voir_table');
     Route::post('/fermercaisse', 'caissecontroller@fermercaisse');
 });
+Route::get('/seeqrcode/{id}', 'admincontroller@seeqrcode');
