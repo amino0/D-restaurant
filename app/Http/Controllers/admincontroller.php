@@ -43,7 +43,14 @@ class admincontroller extends Controller
     public function index()
     {
         $journals = Journal::all();
-        return view('admin.home', compact('journals'));
+        $commandess = DB::select(" SELECT * FROM `ventes` ORDER BY `ventes`.`created_at` DESC limit 10");
+        $commandebest = DB::select(" SELECT sum(prix_vendu), article
+        from ventes 
+        group by article
+        order by sum(prix_vendu) desc 
+        limit 10");
+        // dd($commandebest);
+        return view('admin.home', compact('journals', 'commandess', 'commandebest'));
     }
     public function employer()
     {
@@ -54,7 +61,7 @@ class admincontroller extends Controller
         $menus = Mennue::all();
         return view('admin.menu.menus', compact('menus'));
     }
-    public function menu($id)
+    public function menu()
     {
         $categories = Categorie::all();
         return view('admin.menu.menu', compact('categories'));
@@ -95,17 +102,17 @@ class admincontroller extends Controller
     {
         $name = $request->input('nom');
         $prix = $request->input('prix');
-        $id = $request->input('idmenu');
+        $id = $request->input('idcategorie');
+        $prix_revient = $request->input('prix_revient');
+        $quantite = $request->input('quantite');
 
         $article = new Article;
-
-
-
-
         $article->nom = $name;
         $article->prix = $prix;
         $article->id_categorie = $id;
         $article->nom_categorie = $name;
+        $article->prix_revient = $prix_revient;
+        $article->quantite = $quantite;
         $article->save();
 
 

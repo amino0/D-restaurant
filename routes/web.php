@@ -14,9 +14,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('/caisse');
 });
-
 
 Route::group(['prefix' => 'admin'], function () {
     Voyager::routes();
@@ -27,6 +26,7 @@ Route::group(['prefix' => 'administrateur'], function () {
     Route::get('/employer', 'admincontroller@employer');
     Route::get('/menus', 'admincontroller@menus');
     Route::get('/menu/{id}', 'admincontroller@menu');
+    Route::get('/menu', 'admincontroller@menu');
     Route::get('/categorie/{id}', 'admincontroller@categorie');
     Route::get('/desactivemenu/{id}', 'admincontroller@desactive');
     Route::get('/activemenu/{id}', 'admincontroller@active');
@@ -42,7 +42,7 @@ Route::group(['prefix' => 'serveur'], function () {
     Route::get('/', 'serveurcontroller@index');
     Route::get('/home', 'serveurcontroller@home');
     Route::get('/select/{id}', 'serveurcontroller@select');
-    Route::post('/ajoutarticle', 'serveurcontroller@ajoutarticle');
+    Route::post('/ajoutarticle', 'serveurcontroller@vendre');
     Route::get('/livre/{id}', 'serveurcontroller@livre');
 });
 Route::group(['prefix' => 'cuisine'], function () {
@@ -52,6 +52,11 @@ Route::group(['prefix' => 'cuisine'], function () {
 Route::group(['prefix' => 'caisse'], function () {
     Route::get('/hash', 'caissecontroller@hash');
     Route::get('/', 'caissecontroller@index');
+    Route::get('/facture/{id}', 'caissecontroller@facturer');
+    Route::get('/fermecaisse/{id}', 'caissecontroller@facturer');
+    Route::get('/negocie/{id}', 'caissecontroller@negocie');
+    Route::post('/updateprix', 'caissecontroller@updateprix');
+
     Route::get('/voir/{id}', 'caissecontroller@voir_table');
     Route::post('/fermercaisse', 'caissecontroller@fermercaisse');
 });

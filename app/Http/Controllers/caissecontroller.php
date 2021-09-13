@@ -39,8 +39,8 @@ class caissecontroller extends Controller
         $caisse = DB::select(" SELECT * FROM `caisses` WHERE `jour_compte` = '$hash'");
         if (!empty($caisse)) {
 
-            $commande = DB::select(" SELECT * FROM `commandes` WHERE `jour_id` = '$hash'");
-            $table = DB::select(" SELECT * FROM `tables` ");
+            $commande = DB::select(" SELECT * FROM `ventes` WHERE `hash` = '$hash'");
+            $table = DB::select(" SELECT * FROM `tables`,`commandes` WHERE `jour_id` = '$hash' and `commandes`.`table` = `tables`.`nom_table`  ");
             $tablesum = DB::select(" SELECT * FROM `tables`,`commandes` WHERE `tables`.`id` = `commandes`.`table` and  status_caisse = 0 and `jour_id` = '$hash'");
             $deleted = DB::select(" SELECT * FROM commandes where status_caisse = 0 and `jour_id` = '$hash' ");
 
@@ -49,8 +49,25 @@ class caissecontroller extends Controller
         $commande = Commande::all();
         $deleted = DB::select(" SELECT *  
         FROM commandes where status_caisse = 0");
+        $table = DB::select(" SELECT * FROM `tables` ");
 
-        return view('caisse.homefermer', compact('commande', 'deleted'));
+
+        return view('caisse.homefermer', compact('commande', 'deleted', 'caisse', 'table'));
+    }
+    public function negocie($id)
+    {
+        $vente = DB::select(" SELECT * FROM `ventes` WHERE `id` = '$id'");
+        return view('caisse.negocie', compact('vente'));
+    }
+    public function updateprix(Request $request)
+    {
+        $id = $request->input('id');
+        $prix = $request->input('prix');
+
+        $affected = DB::table('ventes')
+            ->where('id', $id)
+            ->update(['prix_vendu' => $prix]);
+        return redirect('/caisse');
     }
     public function fermercaisse(Request $request)
 
@@ -74,5 +91,8 @@ class caissecontroller extends Controller
         $table = DB::select(" SELECT * FROM `tables` WHERE `id` = '$id'");
 
         return view('caisse.facturetable', compact('commande', 'deleted', 'caisse', 'table'));
+    }
+    public function facturer($id)
+    {
     }
 }

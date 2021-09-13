@@ -243,7 +243,7 @@
 
                                 <div class="col-xl-8 col-lg-7 col-md-7 col-sm-5 text-sm-right text-center layout-spacing align-self-center">
                                     <div class="d-flex justify-content-sm-end justify-content-center">
-                                        <svg id="btn-add-contact" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-shopping-bag"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
+                                      <a href="{{url('/caisse')}}">  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-shopping-bag"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg> </a>
 
                                         <div class="switch align-self-center">
                                         
@@ -349,8 +349,8 @@
                                         </div>
                                       
                                         <div class="user-phone">
-                                          <p class="info-title"> {{$row->nom_table}} </p>
-                                          <p class="usr-ph-no" data-phone="+1 (070) 123-4567">{{$row->nom_table}} </p>
+                                          <p class="info-title"> {{$row->nom}} </p>
+                                          <p class="usr-ph-no" data-phone="+1 (070) 123-4567">{{$row->nom}} </p>
                                       </div>
                                         <div class="action-btn">
                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-map-pin"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg> 

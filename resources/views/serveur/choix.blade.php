@@ -276,7 +276,7 @@
                                                                     <tr>
                                                                         <td>{{$row->nom}}</td>
                                                                         <td>{{$row->heure}}</td>
-                                                                        <td>Table  {{$row->table}}</td>
+                                                                        <td>  {{$row->table}}</td>
                                                                         <td class="text-center"><span class="text-success">Complete</span></td>
                                                                         <td class="text-center">
                                                                             <a type="button" href="{{url("/serveur/livre/$row->id")}}" class="btn btn-success">Livré</a>
@@ -344,9 +344,10 @@
                                    <form action="{{url("/serveur/ajoutarticle")}}" method="POST">
                                     @csrf
                                     
-                                    <input type="hidden" name="nom" value="{{$row->nom_categorie}}">
-                                    <input type="hidden" name="table" value="{{request()->route('id')}}">
-                                    <input type="hidden" name="prix" value="{{$row->prix}}">
+                                    <input type="hidden" name="id_article" value="{{$row->id}}">
+                                    <input type="hidden" name="article" value="{{$row->nom}}">
+                                    <input type="hidden" name="prix_vendu" value="{{$row->prix}}">
+                                    <input type="hidden" name="prix_revient" value="{{$row->prix_revient}}">
                                   
                                     <div class="item-content">
                                         <div class="user-profile">
@@ -356,23 +357,20 @@
                                                   <span class="new-control-indicator"></span>
                                                 </label>
                                             </div>
-                                            @php
-                                              $url = str_replace("\\", '/',$row->image);
-                 
-                                            @endphp
-                                            <img src="{{asset('storage/'.$url)}}" alt="avatar">
+                                           
+                                            <img src="{{asset('template/assets/img/90x90.jpg')}}" alt="avatar">
                                             <div class="user-meta-info">
                                                 <p class="user-name" data-name="Alan Green">{{$row->nom}}</p>
-                                                <p class="user-work" data-occupation="Web Developer">{{$row->nom_categorie}}</p>
+                                                <p class="user-work" data-occupation="Web Developer">{{$row->prix}} DJF</p>
                                             </div>
                                         </div>
                                         <div class="user-email">
-                                            <p class="usr-email-addr" >Prix:  {{$row->prix}} <b>DJF</b></p>
+                                            <p class="usr-email-addr" >Prix de revient:  {{$row->prix_revient}} <b>DJF</b></p>
                                         </div>
                                         
                                         <div class="action-btn">
                                             <button class="action-btn" type="submit">     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-download"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg> </div>
-                                                </button>
+                                            </button>
                                             </div>
                                 </form>
                                 </div>

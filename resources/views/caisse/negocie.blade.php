@@ -4,22 +4,27 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no">
-    <title>CORK Admin Template - Custom Styled DataTables</title>
+    <title>CORK Admin Template - Forms Basic</title>
     <link rel="icon" type="image/x-icon" href="{{asset('template/assets/img/favicon.ico')}}"/>
+    <link href="{{asset('template/assets/css/loader.css')}}" rel="stylesheet" type="text/css" />
+    <script src="{{asset('template/assets/js/loader.js')}}"></script>
     <!-- BEGIN GLOBAL MANDATORY STYLES -->
     <link href="https://fonts.googleapis.com/css?family=Quicksand:400,500,600,700&display=swap" rel="stylesheet">
     <link href="{{asset('template/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet" type="text/css" />
     <link href="{{asset('template/assets/css/plugins.css')}}" rel="stylesheet" type="text/css" />
     <!-- END GLOBAL MANDATORY STYLES -->
 
-    <!-- BEGIN PAGE LEVEL CUSTOM STYLES -->
-    <link rel="stylesheet" type="text/css" href="{{asset('template/plugins/table/datatable/datatables.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{asset('template/assets/css/forms/theme-checkbox-radio.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{asset('template/plugins/table/datatable/dt-global_style.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{asset('template/plugins/table/datatable/custom_dt_custom.css')}}">
-    <!-- END PAGE LEVEL CUSTOM STYLES -->
+    <!--  BEGIN CUSTOM STYLE FILE  -->
+    <link href="{{asset('template/assets/css/scrollspyNav.css')}}" rel="stylesheet" type="text/css" />
+    <!--  END CUSTOM STYLE FILE  -->
 </head>
-<body class="sidebar-noneoverflow">
+<body class="sidebar-noneoverflow" data-spy="scroll" data-target="#navSection" data-offset="100">
+
+    <!-- BEGIN LOADER -->
+    <div id="load_screen"> <div class="loader"> <div class="loader-content">
+        <div class="spinner-grow align-self-center"></div>
+    </div></div></div>
+    <!--  END LOADER -->
     
     <!--  BEGIN NAVBAR  -->
     <div class="header-container">
@@ -28,7 +33,7 @@
             <a href="javascript:void(0);" class="sidebarCollapse" data-placement="bottom"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></a>
 
             <div class="nav-logo align-self-center">
-                <a class="navbar-brand" href="{{url('/cuisine')}}"><img alt="logo" src="{{asset('template/cuisine.png')}}"> <span class="navbar-brand-name">Cuisine</span></a>
+                <a class="navbar-brand" href="{{url('/caisse')}}"><img alt="logo" src="{{asset('template/caisse.png')}}"> <span class="navbar-brand-name">Caisse</span></a>
             </div>
 
             <ul class="navbar-item flex-row mr-auto">
@@ -191,16 +196,11 @@
                     <div class="dropdown-menu position-absolute animated fadeInUp" aria-labelledby="user-profile-dropdown">
                         <div class="">
                             <div class="dropdown-item">
-                                <a class="" href="user_profile.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg> My Profile</a>
+                                <a class="" href="user_profile.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg> Mon Profile</a>
                             </div>
+                           
                             <div class="dropdown-item">
-                                <a class="" href="apps_mailbox.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-inbox"><polyline points="22 12 16 12 14 15 10 15 8 12 2 12"></polyline><path d="M5.45 5.11L2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"></path></svg> Inbox</a>
-                            </div>
-                            <div class="dropdown-item">
-                                <a class="" href="auth_lockscreen.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-lock"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg> Lock Screen</a>
-                            </div>
-                            <div class="dropdown-item">
-                                <a class="" href="auth_login.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-log-out"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg> Sign Out</a>
+                                <a class="" href="auth_login.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-log-out"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg> Deconnection</a>
                             </div>
                         </div>
                     </div>
@@ -218,115 +218,71 @@
         <div class="search-overlay"></div>
 
         <!--  BEGIN TOPBAR  -->
-        <div class="topbar-nav header navbar" role="banner">
-          
-        </div>
+        
         <!--  END TOPBAR  -->
 
         <!--  BEGIN CONTENT AREA  -->
         <div id="content" class="main-content">
-            <div class="layout-px-spacing">
-                
-                    
-           
-                <div class="row layout-spacing">
+            <div class="container">
+
+                <div class="container">
+
                    
-                    <div class="col-lg-12">
-                        <div class="statbox widget box box-shadow">
-                            <div class="widget-header">
-                                <div class="row">
-                                    
-                                    <div class="col-xl-12 col-md-12 col-sm-12 col-12">
-                                        <h4>Plat à faire : @php
-                                            $i = 0;
-                                            foreach($deleted as $row){
-                                            $i = $i + 1;
-                                            }
-                                            echo $i;
-                                            $ldate = date('H:i:s d-m-Y');
-                                            echo " <br><br> <i>  $ldate </i> ";
-                                        @endphp
-                                       </h4>  
-                                        @if(session('success'))
                     
-                                        <div class="alert alert-success mb-4" role="alert">
-                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><svg> ... </svg></button>
-                                            <strong>{{ session('success') }}</strong> </button>
-                                        </div> 
+                    <div class="row layout-top-spacing">
                     
-                                                        @endif
+                        <div id="basic" class="col-lg-12 layout-spacing">
+                            <div class="statbox widget box box-shadow">
+                                <div class="widget-header">
+                                    <div class="row">
+                                        <div class="col-xl-12 col-md-12 col-sm-12 col-12">
+                                            <h4>Negociation de l'article <b>@foreach ($vente as $row )
+                                                {{$row->article}}
+                                            @endforeach</b></h4>
+                                        </div>                 
                                     </div>
                                 </div>
-                            </div>
-                            <div class="widget-content widget-content-area">
-                                <div class="table-responsive mb-4">
-                                    <table id="style-3" class="table style-3  table-hover">
-                                        <thead>
-                                            <tr>
-                                                <th class="checkbox-column text-center"> Record Id </th>
-                                                <th>Table </th>
-                                                <th>Commande</th>
-                                                <th>Heure</th>
-                                                <th>Details</th>
-                                                <th class="text-center">Status</th>
-                                                <th class="text-center">Action</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            @foreach ($commande as $row)
-                                            <tr>
-                                                <td class="checkbox-column text-center">{{$row->id}} </td>
-                                                <td> {{$row->table}}</td>
-                                                <td> <b> {{$row->nom}}  </b></td>
-                                                <td>{{\Carbon\Carbon::createFromFormat('H:i:s',$row->heure)->format('h:i')}}</td>
-                                                <td><button type="button" class="btn btn-primary mb-2 mr-2" data-toggle="modal" data-target="#exampleModal">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-eye"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+                                <div class="widget-content widget-content-area">
 
-                                                  </button> 
-                                                 
-                                                </td>
-                                               
+                                    <div class="row">
+                                        <div class="col-lg-6 col-12 mx-auto">
+                                            <form method="post" action="{{url('/caisse/updateprix')}}">
+                                                @csrf
                                                 
-                                                <td class="text-center"> @php 
-                                                    if($row->status_serveur == null){
+                                                @foreach ($vente as $row )<input type="hidden" name="id" value="{{$row->id}}">
+                                                @endforeach
+                                                <div class="form-group">
+                                                    <p>Prix de revient est <code>@foreach ($vente as $row )
+                                                        {{$row->prix_revient}} DJF
+                                                    @endforeach</code>.</p>
+                                                    <label for="t-text" class="sr-only">Prix negocier</label>
+                                                    @foreach ($vente as $row ) <input type="number" name="prix" value="{{$row->prix_vendu}}" class="form-control" required>@endforeach
+                                                    <input type="submit" name="txt" class="mt-4 btn btn-primary">
+                                                </div>
+                                            </form>
+                                        </div>                                        
+                                    </div>
 
-                                                       echo "<span class='shadow-none badge badge-warning'>En attente</span>";
-
-                                                    }else if($row->status_serveur == '1'){
-                                                        echo " <span class='shadow-none badge badge-primary'>Pret</span> ";
-
-                                                    }
-                                                           
-                                                    @endphp</span></td>
-                                                <td class="text-center">
-                                                    <ul class="table-controls">
-                                                        <li><a href="{{url("/cuisine/pretcommande/$row->id")}}" class="bs-tooltip" data-toggle="tooltip" data-placement="top" title="" data-original-title="Terminer"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check-square"><polyline points="9 11 12 14 22 4"></polyline><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path></svg></a></li>
-                                                    </ul>
-                                                </td>
-                                            </tr>
-                                            @endforeach
-
-                                        </tbody>
-                                    </table>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div>
 
-                </div>
-                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                           
-                            <div class="modal-body">
-                                <p class="modal-text"> <h3>  </h3></p>
-                            </div>
-                            <div class="modal-footer">
-                                <button class="btn" style="background-color: red" data-dismiss="modal"><i class="flaticon-cancel-12"></i> Fermer</button>
-                            </div>
-                        </div>
+                      
+                        
+
+                       
+
+                      
+
+
+                        
+
+
+                     
+
+                        
                     </div>
+                </div>
                 </div>
         <div class="footer-wrapper">
                 <div class="footer-section f-section-1">
@@ -356,80 +312,9 @@
             App.init();
         });
     </script>
+    <script src="{{asset('template/plugins/highlight/highlight.pack.js')}}"></script>
     <script src="{{asset('template/assets/js/custom.js')}}"></script>
     <!-- END GLOBAL MANDATORY SCRIPTS -->
-
-    <!-- BEGIN PAGE LEVEL SCRIPTS -->
-    <script src="{{asset('template/plugins/table/datatable/datatables.js')}}"></script>
-    <script>
-        var myModal = document.getElementById('myModal')
-var myInput = document.getElementById('myInput')
-
-myModal.addEventListener('shown.bs.modal', function () {
-  myInput.focus()
-})
-    </script>
-    <script>
-        // var e;
-        c1 = $('#style-1').DataTable({
-            headerCallback:function(e, a, t, n, s) {
-                e.getElementsByTagName("th")[0].innerHTML='<label class="new-control new-checkbox checkbox-outline-primary m-auto">\n<input type="checkbox" class="new-control-input chk-parent select-customers-info" id="customer-all-info">\n<span class="new-control-indicator"></span><span style="visibility:hidden">c</span>\n</label>'
-            },
-            columnDefs:[ {
-                targets:0, width:"30px", className:"", orderable:!1, render:function(e, a, t, n) {
-                    return'<label class="new-control new-checkbox checkbox-outline-primary  m-auto">\n<input type="checkbox" class="new-control-input child-chk select-customers-info" id="customer-all-info">\n<span class="new-control-indicator"></span><span style="visibility:hidden">c</span>\n</label>'
-                }
-            }],
-            "oLanguage": {
-                "oPaginate": { "sPrevious": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>', "sNext": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>' },
-                "sInfo": "Showing page _PAGE_ of _PAGES_",
-                "sSearch": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>',
-                "sSearchPlaceholder": "Search...",
-               "sLengthMenu": "Results :  _MENU_",
-            },
-            "lengthMenu": [5, 10, 20, 50],
-            "pageLength": 5
-        });
-
-        multiCheck(c1);
-
-        c2 = $('#style-2').DataTable({
-            headerCallback:function(e, a, t, n, s) {
-                e.getElementsByTagName("th")[0].innerHTML='<label class="new-control new-checkbox checkbox-outline-primary m-auto">\n<input type="checkbox" class="new-control-input chk-parent select-customers-info" id="customer-all-info">\n<span class="new-control-indicator"></span><span style="visibility:hidden">c</span>\n</label>'
-            },
-            columnDefs:[ {
-                targets:0, width:"30px", className:"", orderable:!1, render:function(e, a, t, n) {
-                    return'<label class="new-control new-checkbox checkbox-outline-primary  m-auto">\n<input type="checkbox" class="new-control-input child-chk select-customers-info" id="customer-all-info">\n<span class="new-control-indicator"></span><span style="visibility:hidden">c</span>\n</label>'
-                }
-            }],
-            "oLanguage": {
-                "oPaginate": { "sPrevious": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>', "sNext": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>' },
-                "sInfo": "Showing page _PAGE_ of _PAGES_",
-                "sSearch": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>',
-                "sSearchPlaceholder": "Search...",
-               "sLengthMenu": "Results :  _MENU_",
-            },
-            "lengthMenu": [5, 10, 20, 50],
-            "pageLength": 5 
-        });
-
-        multiCheck(c2);
-
-        c3 = $('#style-3').DataTable({
-            "oLanguage": {
-                "oPaginate": { "sPrevious": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>', "sNext": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>' },
-                "sInfo": "Showing page _PAGE_ of _PAGES_",
-                "sSearch": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>',
-                "sSearchPlaceholder": "Search...",
-               "sLengthMenu": "Results :  _MENU_",
-            },
-            "stripeClasses": [],
-            "lengthMenu": [5, 10, 20, 50],
-            "pageLength": 5
-        });
-
-        multiCheck(c3);
-    </script>
-    <!-- END PAGE LEVEL SCRIPTS -->  
+    <script src="{{asset('template/assets/js/scrollspyNav.js')}}"></script>
 </body>
 </html>

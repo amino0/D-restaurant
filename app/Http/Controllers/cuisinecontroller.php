@@ -12,8 +12,8 @@ class cuisinecontroller extends Controller
     {
         //  $d = ;
 
-        $commande = DB::select("SELECT * FROM commandes where status_serveur = '0' or  status_serveur = '1' ");
-        $deleted = DB::select("SELECT * FROM commandes where status_serveur = '0'  ");
+        $commande = DB::select("SELECT * FROM commandes where status_serveur = '0' or  status_serveur = '1' order by heure ASC ");
+        $deleted = DB::select("SELECT * FROM commandes where status_serveur = '0' order by heure ASC  ");
 
 
         return view('cuisine.liste', compact('commande', 'deleted'));

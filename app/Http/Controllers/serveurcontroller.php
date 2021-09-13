@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\DB;
 use App\Table;
 use App\Commande;
+use App\Vente;
 use \Carbon\Carbon;
 
 use Illuminate\Http\Request;
@@ -39,14 +40,14 @@ class serveurcontroller extends Controller
     }
     public function home()
     {
-        $table = DB::select('select * from tables ');
+        $table = DB::select('select * from categories ');
         $commandepret  = DB::select("select * from commandes where `status_serveur` = 1	  ");
 
         return view('serveur.home', compact('table', 'commandepret'));
     }
     public function select($id)
     {
-        $article = DB::select("select * from articles,categories where `categories`.`id` = `articles`.`id_categorie` and `categories`.`type_menu` = 1	  ");
+        $article = DB::select("select * from articles where `articles`.`id_categorie` = $id ");
         $commandepret  = DB::select("select * from commandes where `status_serveur` = 1	  ");
 
         return view('serveur.choix', compact('article', 'commandepret'));
@@ -66,11 +67,15 @@ class serveurcontroller extends Controller
             $name = $request->input('nom');
             $prix = $request->input('prix');
             $table = $request->input('table');
+            $tablee  = DB::select("select * from tables where `id` = $table	  ");
+            foreach ($tablee as $row) {
+                $nom_table = $row->nom_table;
+            }
 
             $commande = new Commande;
             $commande->nom = $name;
             $commande->prix = $prix;
-            $commande->table = $table;
+            $commande->table = $nom_table;
             $commande->suplement = '0';
             $commande->status_serveur = '0';
             $commande->status_caisse = '0';
@@ -80,6 +85,29 @@ class serveurcontroller extends Controller
             return back()->with(
                 'success',
                 'vous avez envoyer la commande !'
+            );
+        }
+    }
+
+    public function vendre(Request $request)
+    {
+        $hash = $this->hash();
+        if ($hash == null) {
+            return back()->with(
+                'succe',
+                'Desoler les caisses sont fermer'
+            );
+        } else {
+            $Vente = new Vente();
+            $Vente->id_article = $request->input('id_article');
+            $Vente->article = $request->input('article');
+            $Vente->prix_vendu = $request->input('prix_vendu');
+            $Vente->prix_revient = $request->input('prix_revient');
+            $Vente->hash = $hash;
+            $Vente->save();
+            return back()->with(
+                'success',
+                'vous avez envoyer à la caisse !'
             );
         }
     }

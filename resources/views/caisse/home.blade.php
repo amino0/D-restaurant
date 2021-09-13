@@ -190,16 +190,17 @@
                     <div class="dropdown-menu position-absolute animated fadeInUp" aria-labelledby="user-profile-dropdown">
                         <div class="">
                             <div class="dropdown-item">
-                                <a class="" href="user_profile.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg> My Profile</a>
+                                <a class="" href="user_profile.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg> Mon Profile</a>
                             </div>
+                            @foreach ($caisse as $row)
+                                                                  
+                         
                             <div class="dropdown-item">
-                                <a class="" href="apps_mailbox.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-inbox"><polyline points="22 12 16 12 14 15 10 15 8 12 2 12"></polyline><path d="M5.45 5.11L2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"></path></svg> Inbox</a>
+                                <a class="{{url("/caisse/fermecaisse/$row->id")}}" href="auth_lockscreen.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-lock"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg> Fermer la caisse</a>
                             </div>
+                            @endforeach
                             <div class="dropdown-item">
-                                <a class="" href="auth_lockscreen.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-lock"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg> Lock Screen</a>
-                            </div>
-                            <div class="dropdown-item">
-                                <a class="" href="auth_login.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-log-out"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg> Sign Out</a>
+                                <a class="" href="auth_login.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-log-out"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg> Deconnection</a>
                             </div>
                         </div>
                     </div>
@@ -230,9 +231,9 @@
                             
                         
                         <div class="widget-content widget-content-area br-6">
-                            <h4>Inpayer liste :  @php
+                            <h4>Vente du Jour :  @php
                                 $i = 0;
-                                foreach($deleted as $row){
+                                foreach($commande as $row){
                                 $i = $i + 1;
                                 }
                                 echo $i;
@@ -240,15 +241,16 @@
                                 echo " <br><br> <i>  $ldate </i> ";
                             @endphp</h4>
                          <font style="float: right"> 
-                            <form action="{{url('caisse/fermercaisse')}}" method="POST">
-                            @csrf
-                            <input type="hidden" name="id" value="@foreach ($caisse as $row)
-                            {{$row->id}}                                          
-                            @endforeach">
-                                <button type="submit" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#examplefermer">Fermer La journner  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-key"><path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4"></path></svg> </button>
-                            </form>
-                        </font>
-                        @if(session('success'))
+                        
+                                <button data-toggle="modal" data-target="#exampleModal" class="btn btn-outline-danger" >Saisir Depense  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-corner-left-down"><polyline points="14 15 9 20 4 15"></polyline><path d="M20 4h-7a4 4 0 0 0-4 4v12"></path></svg> </button>   
+                                <button data-toggle="modal" data-target="#exampleModal2" class="btn btn-outline-info" >Saisir un credit  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trello"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><rect x="7" y="7" width="3" height="9"></rect><rect x="14" y="7" width="3" height="5"></rect></svg> </button>
+                        
+                         </font>
+                       <center>
+                        
+                                <a class="btn btn-outline-warning" href="{{url('/serveur/home')}}" >Saisir Une vente   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-corner-left-down"><polyline points="14 15 9 20 4 15"></polyline><path d="M20 4h-7a4 4 0 0 0-4 4v12"></path></svg> </a>   
+                        
+                       </center>                        @if(session('success'))
         
                         <div class="alert alert-danger mb-4" role="alert">
                             <button type="button" class="close" data-dismiss="alert" aria-label="Close"><svg> ... </svg></button>
@@ -258,104 +260,52 @@
                                         @endif
                             <br><br>
                                         <div class="table-responsive mb-4 mt-4">
-                                <table class="multi-table table table-hover" style="width:100%">
+                                
+                                <table id="example" class="table table-hover" style="width:100%">
                                     <thead>
                                         <tr>
                                             <th class="checkbox-column text-center"> Record Id </th>
-                                            <th>Table </th>
-                                            <th>Commande</th>
-                                            <th>Heure</th>
+                                            <th>Article</th>
                                             <th>Prix</th>
+                                            <th>Prix de revient</th>
                                             <th class="text-center">Status</th>
                                             <th class="text-center">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        @foreach ($commande as $row)
                                         <tr>
-                                            @foreach ($commande as $row)
-
                                             <td class="text-center">{{$row->id}}</td>
-                                            <td>Table {{$row->table}}</td>
-                                            <td>{{$row->nom}}</td>
-                                            <td>{{\Carbon\Carbon::createFromFormat('H:i:s',$row->heure)->format('h:i')}}</td>
-                                            <td><b>{{$row->prix}} DJF </b></td>   
+                                            <td>{{$row->article}}</td>
+                                            <td> <b> {{$row->prix_vendu}} DJF </b></td>
+                                            <td><s>{{$row->prix_revient}} DJF </s></td>   
                                             <td>
-                                                @php 
-                                                if($row->status_caisse == '0'){
+                                                <div class='t-dot bg-warning' data-toggle='tooltip' data-placement='top' title='' data-original-title='Payer'></div>
+                                                 
+                                                
+                                              </td>
+                                              <td class="text-center"> <a href="{{url("/caisse/negocie/$row->id")}}" class="btn btn-outline-primary">Negocier</a> </td>
 
-                                                    echo " <div class='t-dot bg-warning' data-toggle='tooltip' data-placement='top' title='' data-original-title='Impayer'></div> ";
-                                                }else if($row->status_caisse == '1'){
-                                                    echo " <div class='t-dot bg-primary' data-toggle='tooltip' data-placement='top' title='' data-original-title='payer'></div> ";
-
-                                                }
-                                                       
-                                                @endphp
-                                            </td>
-                                            <td class="text-center"> <a href="{{url("/caisse/facture/$row->id")}}" class="btn btn-outline-primary">Facture</a> </td>
+                                            
                                         </tr>
                                         @endforeach
-
                                     </tbody>
                                     <tfoot>
                                         <tr>
                                             <th class="checkbox-column text-center"> Record Id </th>
-                                            <th>Table </th>
-                                            <th>Commande</th>
-                                            <th>Heure</th>
+                                            <th>Article</th>
                                             <th>Prix</th>
+                                            <th>Prix de revient</th>
                                             <th class="text-center">Status</th>
                                             <th class="text-center">Action</th>
                                         </tr>
                                     </tfoot>
                                 </table>
+
+                                
                                 <br>
                                 <br>
-                                <h4>Inpayer liste  Par table:  </h4>
-                                <table class="multi-table table table-striped table-bordered table-hover non-hover" style="width:100%">
-                                    <thead>
-                                        <tr>
-                                            <th>Table</th>
-                                            <th>Progression</th>
-                                            <th>Facture</th>
-                                            <th>Action</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                     
-                                        @foreach ($table  as $row)
-                                        <tr>
-                                            <td><b>{{$row->nom_table}}</b></td>
-                                            
-                                                 <td>
-                                                    <div class="progress">
-                                                        <div class="progress-bar progress-bar-striped bg-danger" role="progressbar" style="width: 10%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
-                                                      </div>
-                                            </td>   
-                                            <td><a type="button" href="" class="btn btn-info">Facture Impayer</a>
-                                            </td>                                        
-                                            <td class="text-center">
-                                                <div class="dropdown custom-dropdown">
-                                                    <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-horizontal"><circle cx="12" cy="12" r="1"></circle><circle cx="19" cy="12" r="1"></circle><circle cx="5" cy="12" r="1"></circle></svg>
-                                                    </a>
-                                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink1">
-                                                        <a class="dropdown-item" href="{{url("caisse/voir/$row->id")}}">Voir</a>
-                                                        <a class="dropdown-item" href="{{url("caisse/facturer_tabe/$row->id")}}">Facturer</a>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        @endforeach
-                                    </tbody>
-                                    <tfoot>
-                                        <tr>
-                                            <th>Table</th>
-                                            <th>Progression</th>
-                                            <th>Facture</th>
-                                            <th>Action</th>
-                                        </tr>
-                                    </tfoot>
-                                </table>
+                                
                             </div>
                         </div>
                     </div>
@@ -363,9 +313,86 @@
                 </div>
 
                 </div>
+                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Saisir Une depense </h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                  <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <label for="basic-url">Montant</label>
+                                              
+                                <div class="input-group mb-4">
+                                  <div class="input-group-prepend">
+                                    <span class="input-group-text">DJF</span>
+                                  </div>
+                                  <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)">
+                                  <div class="input-group-append">
+                                    <span class="input-group-text">.00</span>
+                                  </div>
+                                </div>
+                                
+                                <div class="input-group mb-4">
+                                  <div class="input-group-prepend">
+                                    <span class="input-group-text">Motif</span>
+                                  </div>
+                                  <textarea class="form-control" aria-label="With textarea"></textarea>
+                                </div>                            </div>
+                            <div class="modal-footer">
+                                <button class="btn" data-dismiss="modal"><i class="flaticon-cancel-12"></i> Annuler</button>
+                                <button type="button" class="btn btn-danger">Enregistrer</button>
+                            </div>
+                        </div>
+                    </div>
+                </div> 
+                <div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Saisir Un Credit </h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                  <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <label for="basic-url">Montant</label>
+                                              
+                                <div class="input-group mb-4">
+                                  <div class="input-group-prepend">
+                                    <span class="input-group-text">DJF</span>
+                                  </div>
+                                  <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)">
+                                  <div class="input-group-append">
+                                    <span class="input-group-text">.00</span>
+                                  </div>
+                                </div>
+                                
+                                <div class="input-group mb-5">
+                                    <input type="text" class="form-control" placeholder="Nom complet" aria-label="Recipient's username" aria-describedby="basic-addon2">
+                                    <div class="input-group-append">
+                                      <span class="input-group-text" id="basic-addon6">Nom du Client</span>
+                                    </div>
+                                  </div>
+                                  <div class="input-group mb-4">
+                                    <div class="input-group-prepend">
+                                      <span class="input-group-text" id="basic-addon5">+253</span>
+                                    </div>
+                                    <input type="number" class="form-control" placeholder="Telephone du client" aria-label="Username">
+                                  </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button class="btn" data-dismiss="modal"><i class="flaticon-cancel-12"></i> Annuler</button>
+                                <button type="button" class="btn btn-info">Enregistrer</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
         <div class="footer-wrapper">
                 <div class="footer-section f-section-1">
-                    <p class="">Copyright © 2020 <a target="_blank" href="https://designreset.com">DesignReset</a>, All rights reserved.</p>
+                    <p class="">Copyright © 2021 <a target="_blank" href="https://designreset.com">DesignReset</a>, All rights reserved.</p>
                 </div>
                 <div class="footer-section f-section-2">
                     <p class="">Coded with <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-heart"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></p>

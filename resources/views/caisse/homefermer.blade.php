@@ -239,7 +239,7 @@
                                 $ldate = date('H:i:s d-m-Y');
                                 echo " <br><br> <i>  $ldate </i> ";
                             @endphp</h4>
-                        
+                         
                         @if(session('success'))
         
                         <div class="alert alert-danger mb-4" role="alert">
@@ -266,7 +266,7 @@
                                         <tr>
                                             @foreach ($commande as $row)
 
-                                            <td>{{$row->id}}</td>
+                                            <td class="text-center">{{$row->id}}</td>
                                             <td>Table {{$row->table}}</td>
                                             <td>{{$row->nom}}</td>
                                             <td>{{\Carbon\Carbon::createFromFormat('H:i:s',$row->heure)->format('h:i')}}</td>
@@ -283,8 +283,7 @@
                                                        
                                                 @endphp
                                             </td>
-                                            <td class="text-center"> <button class="btn btn-outline-primary">view</button> </td>
-                                        </tr>
+<td></td>                                        </tr>
                                         @endforeach
 
                                     </tbody>
@@ -307,43 +306,42 @@
                                     <thead>
                                         <tr>
                                             <th>Table</th>
-                                            <th>Total</th>
                                             <th>Progression</th>
-                                            <th>Heure</th>
+                                            <th>Facture</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
+                                     
+                                        @foreach ($table  as $row)
                                         <tr>
-                                            <td><b>Table 4</b></td>
-                                            <td><b>18 500 </b>DJF</td>
-                                            <td>
-                                                <div class="progress br-30">
-                                                    <div class="progress-bar br-30 bg-warning" role="progressbar" style="width: 67%" aria-valuenow="67" aria-valuemin="0" aria-valuemax="100"></div>
-                                                </div>
-                                            </td>
-                                            <td>18h15</td>
-                                           
+                                            <td><b>{{$row->nom_table}}</b></td>
+                                            
+                                                 <td>
+                                                    <div class="progress">
+                                                        <div class="progress-bar progress-bar-striped bg-danger" role="progressbar" style="width: 10%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                                                      </div>
+                                            </td>   
+                                            <td><a type="button" href="" class="btn btn-info">Facture Impayer</a>
+                                            </td>                                        
                                             <td class="text-center">
                                                 <div class="dropdown custom-dropdown">
                                                     <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-horizontal"><circle cx="12" cy="12" r="1"></circle><circle cx="19" cy="12" r="1"></circle><circle cx="5" cy="12" r="1"></circle></svg>
                                                     </a>
                                                     <div class="dropdown-menu" aria-labelledby="dropdownMenuLink1">
-                                                        <a class="dropdown-item" href="javascript:void(0);">Voir</a>
-                                                        <a class="dropdown-item" href="javascript:void(0);">Faire une Facture Impayer</a>
-                                                        <a class="dropdown-item" href="javascript:void(0);">Facturer</a>
+                                                        <a class="dropdown-item" href="{{url("caisse/voir/$row->id")}}">Voir</a>
                                                     </div>
                                                 </div>
                                             </td>
                                         </tr>
+                                        @endforeach
                                     </tbody>
                                     <tfoot>
                                         <tr>
                                             <th>Table</th>
-                                            <th>Total</th>
                                             <th>Progression</th>
-                                            <th>Heure</th>
+                                            <th>Facture</th>
                                             <th>Action</th>
                                         </tr>
                                     </tfoot>
@@ -370,7 +368,9 @@
     <!-- END MAIN CONTAINER -->
     
     
-    
+    <script>
+        
+    </script>
     <!-- BEGIN GLOBAL MANDATORY SCRIPTS -->
     <script src="{{asset('template/assets/js/libs/jquery-3.1.1.min.js')}}"></script>
     <script src="{{asset('template/bootstrap/js/popper.min.js')}}"></script>
